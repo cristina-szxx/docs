@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qexámenes — Linhas Editoriais</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #E5DACE;
+    --text: #141212;
+    --white: #F5F3EE;
+    --accent: #FE6112;
+    --accent2: #FE6112;
+    --accent3: #2175C2;
+    --accent4: #960803;
+    --accent5: #1EB051;
+    --muted: #4d4845;
+    --border: rgba(35,31,32,0.12);
+    --card-bg: #D9CFBF;
+    --card-bg-hover: #f3e9d9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 64px 60px 48px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+  }
+
+  .brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .header-meta {
+    text-align: right;
+  }
+
+  .header-meta p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .header-meta strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* ── PHILOSOPHY BANNER ── */
+  .philosophy {
+    background: var(--accent);
+    padding: 32px 60px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .philosophy-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .philosophy-content h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+
+  .philosophy-content p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    max-width: 720px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+
+  /* ── MAIN GRID ── */
+  main {
+    padding: 0 60px 80px;
+  }
+
+  .section-intro {
+    padding: 56px 0 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .section-intro h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  .section-intro p {
+    font-size: 14px;
+    color: rgba(35,31,32,0.6);
+    line-height: 1.7;
+    align-self: end;
+  }
+
+  /* ── EDITORIAL LINE CARDS ── */
+  .lines-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+
+  .line-card {
+    background: var(--card-bg);
+    padding: 36px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .line-card:hover {
+    background: var(--card-bg-hover);
+  }
+
+  .line-card.full {
+    grid-column: 1 / -1;
+  }
+
+  .line-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--card-accent, var(--accent));
+  }
+
+  .card-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--accent));
+    margin-bottom: 16px;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .card-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: rgba(35,31,32,0.6);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .formats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .fmt-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--card-accent, var(--accent));
+    color: var(--card-accent, var(--accent));
+    opacity: 0.85;
+  }
+
+  /* ── IDEAS LIST ── */
+  .ideas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .idea-item {
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .idea-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--card-accent, var(--accent));
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .idea-body {}
+
+  .idea-type {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--card-accent, var(--accent));
+    margin-bottom: 3px;
+  }
+
+  .idea-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .idea-example {
+    font-size: 12px;
+    color: rgba(35,31,32,0.5);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ── HIGHLIGHT CARD (Humor) ── */
+  .highlight-card {
+    background: #e3d7c7;
+    border: 1px solid rgba(123,92,240,0.25);
+    padding: 48px 60px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2px;
+  }
+
+  .highlight-card::after {
+    content: '✦';
+    position: absolute;
+    right: 60px;
+    top: 40px;
+    font-size: 80px;
+    color: var(--accent);
+    opacity: 0.08;
+  }
+
+  .highlight-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .highlight-left .card-title {
+    font-size: clamp(22px, 2.5vw, 32px);
+    margin-bottom: 12px;
+  }
+
+  .highlight-left .card-desc {
+    font-size: 14px;
+  }
+
+  .manifesto {
+    background: rgba(123,92,240,0.08);
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid rgba(123,92,240,0.2);
+  }
+
+  .manifesto p {
+    font-size: 13px;
+    color: rgba(35,31,32,0.7);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .manifesto p:last-child { margin-bottom: 0; }
+
+  .manifesto strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── MEME FORMATS GRID ── */
+  .meme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .meme-card {
+    background: rgba(35,31,32,0.06);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+  }
+
+  .meme-emoji { font-size: 20px; margin-bottom: 8px; display: block; }
+
+  .meme-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .meme-desc {
+    font-size: 11px;
+    color: rgba(35,31,32,0.5);
+    line-height: 1.4;
+  }
+
+  /* ── CADENCE TABLE ── */
+  .cadence-section {
+    background: var(--card-bg);
+    padding: 40px 40px;
+    margin-top: 2px;
+  }
+
+  .cadence-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .cadence-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+
+  .day-col { text-align: center; }
+
+  .day-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .day-post {
+    border-radius: 6px;
+    padding: 10px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    header, main, .philosophy, footer { padding-left: 24px; padding-right: 24px; }
+    header { grid-template-columns: 1fr; gap: 20px; }
+    .header-meta { text-align: left; }
+    .section-intro, .lines-grid, .highlight-inner { grid-template-columns: 1fr; }
+    .cadence-grid { grid-template-columns: repeat(4, 1fr); }
+    .highlight-card { padding: 32px 24px; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; color: black; }
+    .line-card, .highlight-card, .cadence-section { background: #f8f8f8; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <p class="brand">Qexámenes.mx — Estratégia de Conteúdo</p>
+    <h1>Linhas<br><em>Editoriais</em><br></h1>
+  </div>
+  <div class="header-meta">
+    <p>Versão</p>
+    <strong>1.0</strong>
+    <p style="margin-top:12px">Redes</p>
+    <strong>Instagram · TikTok</strong>
+    <p style="margin-top:12px">Público</p>
+    <strong>Vestibulandos 18–25</strong>
+  </div>
+</header>
+
+<!-- PHILOSOPHY BANNER -->
+<div class="philosophy">
+  <div class="philosophy-label">Filosofia</div>
+  <div class="philosophy-content">
+    <h2>Conteúdo rápido, autêntico e que mistura<br>entretenimento com utilidade.</h2>
+    <p>Não é uma aula. Não é formal. É entretenimento com valor embutido — o formato que mais cresce no México e na LATAM. O objetivo é que o vestibulando aprenda sem sentir que está estudando.</p>
+    <div class="pills">
+      <span class="pill">POV</span>
+      <span class="pill">Dicas rápidas</span>
+      <span class="pill">30–90 segundos</span>
+      <span class="pill">Meme + utilidade</span>
+      <span class="pill">Situações reais</span>
+      <span class="pill">Utilidade + curiosidade</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="section-intro">
+    <h2>6 Linhas<br>Editoriais</h2>
+    <p>Cada linha tem um objetivo estratégico distinto: desde alcance orgânico e autoridade até conversão direta. A chave é a mistura semanal equilibrada entre todas elas.</p>
+  </div>
+
+  <!-- GRID DE LINHAS -->
+  <div class="lines-grid">
+
+    <!-- 1. EDUCATIVO -->
+    <div class="line-card" style="--card-accent: #2175C2">
+      <div class="card-num">Linha 01</div>
+      <div class="card-header">
+        <span class="card-icon">📚</span>
+        <h3 class="card-title">Conteúdo Educativo</h3>
+      </div>
+      <p class="card-desc">Explicações de 30–90s sobre História, Matemática, Filosofia e dicas de prova. Utilidade + curiosidade = alto engajamento.</p>
+      <div class="formats-row">
+        <span class="fmt-tag">Reels</span>
+        <span class="fmt-tag">Carrossel</span>
+        <span class="fmt-tag">Stories</span>
+        <span class="fmt-tag">TikTok</span>
+      </div>
+      <div class="ideas-list">
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Quiz interativo</div>
+            <div class="idea-name">Questão estilo UNAM no feed</div>
+            <div class="idea-example">Questão real da prova → resposta no dia seguinte para trazer o usuário de volta.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Mini-aula 60s</div>
+            <div class="idea-name">Resolução comentada de questão difícil</div>
+            <div class="idea-example">Uma questão real do EXANI-II explicada passo a passo em menos de um minuto.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Erro clássico</div>
+            <div class="idea-name">O erro que reprova milhares</div>
+            <div class="idea-example">"Esse erro de Matemática faz milhares errarem — e cometemos sem perceber."</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Enquete Stories</div>
+            <div class="idea-name">Questão do dia — Química / Física</div>
+            <div class="idea-example">4 alternativas + enquete. Resposta correta amanhã. Ativa as notificações.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Desmistificando</div>
+            <div class="idea-name">Mitos da prova — série semanal</div>
+            <div class="idea-example">"Mitos sobre o exame da UNAM que todo mundo acredita (e são FALSOS)"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MOTIVAÇÃO -->
+    <div class="line-card" style="--card-accent: #960803">
+      <div class="card-num">Linha 02</div>
+      <div class="card-header">
+        <span class="card-icon">🎯</span>
+        <h3 class="card-title">Motivação & Mentalidade</h3>
+      </div>
+      <p class="card-desc">Conteúdo emocional que conecta o esforço diário com a conquista da vaga. Alto alcance orgânico e compartilhamento.</p>
+      <div class="formats-row">
+        <span class="fmt-tag">Reels</span>
+        <span class="fmt-tag">Carrossel</span>
+        <span class="fmt-tag">Stories</span>
+        <span class="fmt-tag">Feed</span>
+      </div>
+      <div class="ideas-list">
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Transformação</div>
+            <div class="idea-name">Antes e depois da mentalidade de estudo</div>
+            <div class="idea-example">Contraste visual: o que pensa quem não passa vs. quem passa.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Empatia</div>
+            <div class="idea-name">O que ninguém te conta sobre reprovar</div>
+            <div class="idea-example">Post honesto sobre a experiência emocional de não passar. Tom íntimo, não comercial.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Urgência positiva</div>
+            <div class="idea-name">Contagem regressiva motivacional</div>
+            <div class="idea-example">"Faltam 60 dias para a prova. Isso é o que você pode alcançar se começar HOJE."</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Desmistificando</div>
+            <div class="idea-name">Mitos e verdades do vestibulando</div>
+            <div class="idea-example">"Só os gênios entram na UNAM." ❌ — A verdade por trás dos dados reais.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. UNIVERSIDADES -->
+    <div class="line-card" style="--card-accent: #1EB051">
+      <div class="card-num">Linha 03</div>
+      <div class="card-header">
+        <span class="card-icon">🏛️</span>
+        <h3 class="card-title">Conhecimento sobre as Universidades</h3>
+      </div>
+      <p class="card-desc">Posts sobre UNAM, IPN, UAM, UDG — estrutura, cursos, curiosidades. Conteúdo altamente salvo e compartilhado.</p>
+      <div class="formats-row">
+        <span class="fmt-tag">Carrossel</span>
+        <span class="fmt-tag">Reels</span>
+        <span class="fmt-tag">TikTok</span>
+        <span class="fmt-tag">Infográfico</span>
+      </div>
+      <div class="ideas-list">
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Curiosidades</div>
+            <div class="idea-name">5 coisas que você não sabia sobre a UNAM</div>
+            <div class="idea-example">Dados históricos e surpreendentes. O tipo de post que se salva e reenvia.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Comparativo</div>
+            <div class="idea-name">UNAM vs. IPN: qual é melhor para a sua carreira?</div>
+            <div class="idea-example">Por área do conhecimento: Medicina, Engenharia, Ciências Sociais, etc.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Série</div>
+            <div class="idea-name">Carreiras em foco</div>
+            <div class="idea-example">"O que faz um egresso de Engenharia do IPN?" — Reels com entrevistados reais.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CALENDÁRIO -->
+    <div class="line-card" style="--card-accent: #FE6112">
+      <div class="card-num">Linha 04</div>
+      <div class="card-header">
+        <span class="card-icon">🗓️</span>
+        <h3 class="card-title">Calendário & Datas-Chave</h3>
+      </div>
+      <p class="card-desc">Conteúdo atrelado ao calendário de convocatórias da UNAM, IPN, UAM, etc. Gera urgência real e tráfego orgânico nos picos.</p>
+      <div class="formats-row">
+        <span class="fmt-tag">Stories</span>
+        <span class="fmt-tag">Feed fixado</span>
+        <span class="fmt-tag">Carrossel</span>
+        <span class="fmt-tag">Reels</span>
+      </div>
+      <div class="ideas-list">
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Alerta</div>
+            <div class="idea-name">Faltam 30 dias para a prova da UNAM</div>
+            <div class="idea-example">Stories + link direto para a plataforma. Série com 30, 15 e 7 dias antes.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Checklist</div>
+            <div class="idea-name">O que fazer no dia anterior à prova</div>
+            <div class="idea-example">Checklist visual completo. Alto índice de salvamentos. Viral entre vestibulandos.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Contagem regressiva</div>
+            <div class="idea-name">Série semanal até a prova</div>
+            <div class="idea-example">Cada semana: uma dica diferente + contador visual. Fideliza o seguidor.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Pós-prova</div>
+            <div class="idea-name">A prova acabou. E agora?</div>
+            <div class="idea-example">Guia de próximos passos, convocatórias paralelas, opções caso não tenha passado.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. PRODUTO -->
+    <div class="line-card full" style="--card-accent: #7B5CF0">
+      <div class="card-num">Linha 05</div>
+      <div class="card-header">
+        <span class="card-icon">🚀</span>
+        <h3 class="card-title">Produto & Conversão</h3>
+      </div>
+      <p class="card-desc">Posts que mostram as funcionalidades da plataforma, o plano premium e CTAs diretos. Objetivo: converter seguidores em usuários ativos.</p>
+      <div class="formats-row">
+        <span class="fmt-tag">Reels</span>
+        <span class="fmt-tag">Carrossel</span>
+        <span class="fmt-tag">Stories com link</span>
+        <span class="fmt-tag">Infográfico</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:8px">
+        <div class="idea-item" style="padding-right:24px">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Demo</div>
+            <div class="idea-name">Veja como funciona o simulado real da UNAM</div>
+            <div class="idea-example">Gravação de tela do fluxo completo em menos de 60s. Reels ou TikTok.</div>
+          </div>
+        </div>
+        <div class="idea-item" style="padding-right:24px">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Destaque de funcionalidade</div>
+            <div class="idea-name">Já usou os cadernos por matéria?</div>
+            <div class="idea-example">Carrossel com prints da plataforma mostrando a organização por tema.</div>
+          </div>
+        </div>
+        <div class="idea-item" style="padding-right:24px">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Teste gratuito</div>
+            <div class="idea-name">7 dias grátis. Sem cartão. Sem desculpas.</div>
+            <div class="idea-example">CTA direto e objetivo. Imagem limpa com frase de impacto. Sem enfeites.</div>
+          </div>
+        </div>
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-body">
+            <div class="idea-type">Comparativo</div>
+            <div class="idea-name">Qexámenes vs. estudar sozinho: os dados</div>
+            <div class="idea-example">Infográfico com dados reais de melhora de pontuação. Baseado em usuários reais.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /lines-grid -->
+
+  <!-- 6. HUMOR — HIGHLIGHT -->
+  <div class="highlight-card">
+    <div class="card-num" style="color:var(--accent)">Linha 06 — A mais importante para crescimento orgânico</div>
+    <div class="highlight-inner">
+      <div class="highlight-left">
+        <div class="card-header">
+          <span class="card-icon">😂</span>
+          <h3 class="card-title" style="font-size:clamp(20px,2.5vw,28px)">Educativo + Humor<br><span style="color:var(--accent)">Edutainment</span></h3>
+        </div>
+        <p class="card-desc" style="font-size:14px;margin-bottom:20px">Conteúdo útil em linguagem meme. O formato que mais cresce no México e na LATAM: <strong style="color:var(--text)">"conteúdo que ensina sem parecer que está ensinando."</strong></p>
+        <div class="formats-row">
+          <span class="fmt-tag" style="--card-accent:#960803">TikTok</span>
+          <span class="fmt-tag" style="--card-accent:#960803">Reels</span>
+          <span class="fmt-tag" style="--card-accent:#960803">Meme estático</span>
+          <span class="fmt-tag" style="--card-accent:#960803">POV</span>
+        </div>
+        <div class="meme-grid">
+          <div class="meme-card">
+            <span class="meme-emoji">🎭</span>
+            <div class="meme-name">Explicar física com piada</div>
+            <div class="meme-desc">A fórmula é a piada. A piada é a fórmula.</div>
+          </div>
+          <div class="meme-card">
+            <span class="meme-emoji">💅</span>
+            <div class="meme-name">Explicar como fofoca</div>
+            <div class="meme-desc">"Ok então a mitocôndria basicamente é a mãe da célula..."</div>
+          </div>
+          <div class="meme-card">
+            <span class="meme-emoji">⚡</span>
+            <div class="meme-name">Tema em 30s + remate</div>
+            <div class="meme-desc">Resumo super rápido + punchline final que prende.</div>
+          </div>
+          <div class="meme-card">
+            <span class="meme-emoji">😭</span>
+            <div class="meme-name">Expectativa vs. realidade</div>
+            <div class="meme-desc">Do vestibulando "dedicado" vs. o que realmente acontece.</div>
+          </div>
+          <div class="meme-card">
+            <span class="meme-emoji">🤫</span>
+            <div class="meme-name">Erros que não te contam</div>
+            <div class="meme-desc">"Coisas que só quem estuda para a prova entende."</div>
+          </div>
+          <div class="meme-card">
+            <span class="meme-emoji">🎬</span>
+            <div class="meme-name">POV: sou vestibulando</div>
+            <div class="meme-desc">Situações reais da vida de quem estuda para a UNAM.</div>
+          </div>
+        </div>
+      </div>
+      <div class="manifesto">
+        <p>O formato que domina o México e a LATAM agora não é a aula gravada nem o carrossel acadêmico.</p>
+        <p>É o conteúdo que <strong>parece entretenimento mas ensina algo real.</strong></p>
+        <p>Exemplos que funcionam:</p>
+        <p>→ <strong>"Coisas que só quem estuda para o vestibular entende"</strong></p>
+        <p>→ <strong>"Resumindo um tema em 30 segundos + piada"</strong></p>
+        <p>→ <strong>"Ensinando algo enquanto reclamo da minha própria vida"</strong> (shitpost educativo)</p>
+        <p>→ <strong>"Expectativa vs. realidade do estudante dedicado"</strong></p>
+        <p>→ <strong>"Erros que te fazem reprovar (e ninguém fala sobre eles)"</strong></p>
+        <p style="margin-top:16px;color:rgba(35,31,32,0.45);font-size:12px">Esta linha deve ter pelo menos 2 posts por semana para alimentar o algoritmo do TikTok e do Instagram Reels com conteúdo de alto alcance.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADÊNCIA SUGERIDA -->
+  <div class="cadence-section">
+    <div class="cadence-title">Cadência semanal sugerida</div>
+    <div class="cadence-grid">
+      <div class="day-col">
+        <div class="day-label">Seg</div>
+        <div class="day-post" style="background:rgba(60,191,240,0.15);color:#2A9DC7;font-size:10px">Educativo<br>Quiz ou mini-aula</div>
+      </div>
+      <div class="day-col">
+        <div class="day-label">Ter</div>
+        <div class="day-post" style="background:rgba(224,92,138,0.15);color:#C04070;font-size:10px">Motivação<br>Frase ou depoimento</div>
+      </div>
+      <div class="day-col">
+        <div class="day-label">Qua</div>
+        <div class="day-post" style="background:rgba(123,92,240,0.15);color:#6040C0;font-size:10px">Humor<br>Meme ou POV</div>
+      </div>
+      <div class="day-col">
+        <div class="day-label">Qui</div>
+        <div class="day-post" style="background:rgba(60,184,122,0.15);color:#2A8A55;font-size:10px">Universidades<br>Curiosidade</div>
+      </div>
+      <div class="day-col">
+        <div class="day-label">Sex</div>
+        <div class="day-post" style="background:rgba(60,191,240,0.15);color:#2175C2;font-size:10px">Educativo<br>Erro clássico</div>
+      </div>
+      <div class="day-col">
+        <div class="day-label">Sáb</div>
+        <div class="day-post" style="background:rgba(123,92,240,0.15);color:#960803;font-size:10px">Humor<br>Edutainment</div>
+      </div>
+      <div class="day-col">
+        <div class="day-label">Dom</div>
+        <div class="day-post" style="background:rgba(240,160,60,0.15);color:#B07020;font-size:10px">Produto<br>CTA ou demo</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:rgba(35,31,32,0.4);margin-top:20px">+ Stories com enquete, questão do dia ou contagem regressiva. Calendário & Datas: posts extras nas semanas de convocatória.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>Documento interno — Estratégia de conteúdo 2026</p>
+  <div class="footer-logo">Qexámenes</div>
+</footer>
+
+</body>
+</html>
