@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Assinatura de E-mail</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      gap: 32px;
+    }
+    .instructions {
+      background: #fff;
+      border-left: 4px solid #4F46E5;
+      border-radius: 8px;
+      padding: 20px 24px;
+      max-width: 680px;
+      width: 100%;
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.7;
+    }
+    .instructions h2 { font-size: 15px; color: #4F46E5; margin-bottom: 10px; font-weight: 700; }
+    .instructions ol { padding-left: 18px; }
+    .instructions li { margin-bottom: 6px; }
+    .instructions code { background: #EEF2FF; color: #4338CA; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+    .signature-wrapper {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 680px;
+      width: 100%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .signature-wrapper h3 { font-size: 13px; color: #9CA3AF; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="instructions">
+    <h2>📋 Como usar esta assinatura</h2>
+    <ol>
+      <li>Substitua os campos marcados com <code>[COLCHETES]</code> pelos seus dados.</li>
+      <li>Selecione <strong>toda a assinatura</strong> abaixo (clique no início e arraste até o fim) e copie com <code>Ctrl+C</code> / <code>Cmd+C</code>.</li>
+      <li>No Gmail, vá em <strong>Configurações → Ver todas as configurações → Geral → Assinatura</strong>.</li>
+      <li>Cole a assinatura copiada na caixa de texto e salve.</li>
+    </ol>
+  </div>
+
+  <div class="signature-wrapper">
+    <h3>Sua assinatura</h3>
+
+    <!--
+    ╔══════════════════════════════════════════════════════╗
+    ║  SUBSTITUA OS CAMPOS ABAIXO PELOS DADOS REAIS        ║
+    ╚══════════════════════════════════════════════════════╝
+    -->
+
+    <!-- INÍCIO DA ASSINATURA — selecione e copie daqui até FIM DA ASSINATURA -->
+    <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #374151;">
+      <tr>
+        <!-- COLUNA 1: Logo -->
+        <td valign="middle" style="padding-right: 16px;">
+          <!-- Substitua o src pela URL da sua logo -->
+          <img
+            src="https://www.fea.usp.br/sites/all/themes/FEA/images/logo-fea-usp.png?text=FEAUSP"
+            alt="Logo"
+            width="85"
+            height="25"
+            style="display: block; border: 0;"
+          />
+        </td>
+
+        <!-- COLUNA 2: Linha divisória vertical -->
+        <td style="border-left: 1px solid #D1D5DB; padding: 0; width: 1px;">&nbsp;</td>
+
+        <!-- COLUNA 3: Informações -->
+        <td valign="middle" style="padding-left: 16px;">
+
+          <!-- NOME: substitua pelo nome da pessoa -->
+          <p style="margin: 0 0 2px 0; font-size: 14px; font-weight: bold; color: #082942;">[Nome e sobrenome]</p>
+
+          <!-- CARGO: substitua pelo cargo -->
+          <p style="margin: 0 0 10px 0; font-size: 12px; color: #6B7280; padding-bottom: 10px; border-bottom: 1px solid #E5E7EB;">[Seu Cargo]</p>
+
+          <!-- LINKS: substitua as URLs e textos -->
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <!-- LINK DO SITE -->
+              <td style="padding: 0;">
+                <a href="https://www.seusite.com.br" target="_blank" style="text-decoration: none; color: #374151; font-size: 12px;">www.fea.usp.br</a>
+              </td>
+
+              <!-- SEPARADOR | -->
+              <td style="padding: 0 8px; color: #D1D5DB; font-size: 12px;">|</td>
+
+              <!-- LINK DO INSTAGRAM com ícone -->
+              <td style="padding: 0;">
+                <a href="https://instagram.com/seuperfil" target="_blank" style="text-decoration: none; color: #374151; font-size: 12px;">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="padding-right: 4px; vertical-align: middle;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="12" height="12" alt="Instagram" style="display: block; border: 0;" />
+                      </td>
+                      <td style="vertical-align: middle; color: #374151; font-size: 12px;">
+                        <!-- Substitua pelo @ do Instagram -->
+                        @seuperfil
+                      </td>
+                    </tr>
+                  </table>
+                </a>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+    <!-- FIM DA ASSINATURA -->
+
+  </div>
+
+</body>
+</html>
